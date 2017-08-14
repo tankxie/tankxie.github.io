@@ -407,7 +407,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/FFmpeg学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/FFmpeg学习笔记01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -426,7 +426,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/14/FFmpeg学习笔记/" itemprop="url">FFmpeg学习笔记</a></h1>
+                <a class="post-title-link" href="/2017/08/14/FFmpeg学习笔记01/" itemprop="url">FFmpeg学习笔记01</a></h1>
         
 
         <div class="post-meta">
@@ -461,8 +461,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FFMpeg系列/" itemprop="url" rel="index">
-                    <span itemprop="name">FFMpeg系列</span>
+                  <a href="/categories/FFMpeg学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">FFMpeg学习笔记</span>
                   </a>
                 </span>
 
@@ -500,7 +500,39 @@
       
         
           
-            
+            <p>学习新技术之前，问自己两个问题很重要：</p>
+<ul>
+<li>掌握这门需要学哪些方面的知识？</li>
+<li>应用场景是什么？</li>
+</ul>
+<p>把这两个问题弄清楚之后，就可以一方面从宏观上对知识形成体系，另一方面可以突出学习的主次。本文主要记录我当时开始学的时候，思考这两个问题时候的心路历程，整理出来供自己日后翻阅！</p>
+<h2 id="学习背景"><a href="#学习背景" class="headerlink" title="学习背景"></a>学习背景</h2><ol>
+<li>之前在做人脸识别和OCR项目的时候，需要在移动端录制视频传到后台进行检测或识别，这个过程涉及到视频采集，然后按照和协议的格式传递到后台做处理。这个过程涉及到了视频的编解码处理。</li>
+<li>音视频技术在移动端应用日益广泛，应用场景很丰富。</li>
+</ol>
+<p>##应用场景</p>
+<p>音视频处理和我们并不陌生。</p>
+<p>打电话、微信语音聊天、在各种直播平台上看直播、用微信视频聊天等行为，都是我们每天都在经历。从这个意义上讲，音视频处理对我们而言并不陌生。</p>
+<p>在上述列举的场景中，我们可以提取出一个玩音视频通用的模型：</p>
+<p><strong>A处采集</strong> –&gt; <strong>传输</strong> –&gt; <strong>B处播放</strong>。</p>
+<p>这三个步骤是普通用户是可以感知的，但其实，还有步骤是向普通用户隐藏的。</p>
+<p>由于采集的音视频原始数据太大，我们采集完之后并不会立即传输，而是会<strong>编码</strong>后进行传输；同样，用户接收到网络传输的数据之后需要<strong>解码</strong>之后才能播放。所以，实际的流程是这样的：</p>
+<p>A处采集 –&gt; <strong>编码</strong> –&gt; 传输 –&gt; <strong>解码</strong> –&gt; B处播放。</p>
+<p>大致知道是怎么玩的之后，我们就可以分析其中包含的技术点了，然后在其中去找你最迫切需要的技术去学习。</p>
+<h2 id="音视频处理基本流程"><a href="#音视频处理基本流程" class="headerlink" title="音视频处理基本流程"></a>音视频处理基本流程</h2><p>接下来看一下，音频采集、编码、传输、解码以及播放的流程。</p>
+<p><img src="/2017/08/14/FFmpeg学习笔记01/音频处理流程.png" alt="音频采集、传输播放模型"><br>从上图我们可以总结出：</p>
+<ol>
+<li>硬件设备采集的原始音频数据是PCM格式数据，原始数据有很多冗余，体积大，并不适合传输，因此，我们要对它进行编码，采集这一块与我而言不是重点，在这就一笔带过；</li>
+<li>编码就是压缩数据的一个过程，图示的是采用G711编码算法来编码PCM数据。编码有硬编码和软编码之分，编码算法也有多种，编码需要重点学习，后面有专门篇章介绍；</li>
+<li>编码之后数据经过网络传输，这涉及到网络传输协议，这就涉及到各种流媒体传输网络协议，后面有专门篇章介绍；</li>
+<li>接下来就走到解码和播放部分了，其实就是播放器，后续也有专门篇章介绍。</li>
+</ol>
+<p>视频亦然，入下图所示：</p>
+<p><img src="/2017/08/14/FFmpeg学习笔记01/视频处理流程.png" alt="音频采集、传输播放模型"></p>
+<h2 id="音视频基础知识框图"><a href="#音视频基础知识框图" class="headerlink" title="音视频基础知识框图"></a>音视频基础知识框图</h2><p>一下框图是从雷霄华学者的<a href="http://blog.csdn.net/leixiaohua1020/article/details/18893769" target="_blank" rel="external">博客</a>提取出来的，很全面，重新整理一下，分享一下，可以对照其中学习：</p>
+<p><img src="/2017/08/14/FFmpeg学习笔记01/音视频学习框架.png" alt="音频采集、传输播放模型"></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>弄清楚场景和知识体系之后，接下来就是找自己需要或者感兴趣的模块去深入学习了。</p>
+
           
         
       
