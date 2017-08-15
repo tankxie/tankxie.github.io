@@ -104,8 +104,9 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/08/14/iOS音视频处理学习笔记01/音频处理流程.png">
 <meta property="og:image" content="http://yoursite.com/2017/08/14/iOS音视频处理学习笔记01/视频处理流程.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/14/iOS音视频处理学习笔记01/直播.png">
 <meta property="og:image" content="http://yoursite.com/2017/08/14/iOS音视频处理学习笔记01/音视频学习框架.png">
-<meta property="og:updated_time" content="2017-08-15T12:53:09.000Z">
+<meta property="og:updated_time" content="2017-08-15T13:14:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS音视频处理学习笔记01">
 <meta name="twitter:description" content="学习新技术之前，问自己两个问题很重要：  掌握这门需要学哪些方面的知识？ 应用场景是什么？  把这两个问题弄清楚之后，一方面可以从宏观上对知识形成体系；另一方面可以突出学习的主次。本文主要记录我当时学的时候，思考这两个问题时候的心路历程，整理出来供自己日后翻阅！ 学习背景 前段时间在做人脸识别和OCR项目的时候，需要在移动端录制视频传到后台进行检测或识别，这个过程首先要在移动端采集视频，然后将视频">
@@ -339,8 +340,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FFMpeg学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">FFMpeg学习笔记</span>
+                  <a href="/categories/音视频学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">音视频学习笔记</span>
                   </a>
                 </span>
 
@@ -386,8 +387,7 @@
 <li>前段时间在做人脸识别和OCR项目的时候，需要在移动端录制视频传到后台进行检测或识别，这个过程首先要在移动端采集视频，然后将视频数据传递到后台做处理。</li>
 <li>音视频技术在移动端应用日益广泛，应用场景很丰富。</li>
 </ol>
-<p>##应用场景</p>
-<p>音视频处理和我们并不陌生。</p>
+<h2 id="处理流程分析"><a href="#处理流程分析" class="headerlink" title="处理流程分析"></a>处理流程分析</h2><p>音视频处理和我们并不陌生。</p>
 <p>打电话、微信语音聊天、在各种直播平台上看直播、用微信视频聊天等行为，都是我们每天都在经历。从这个意义上讲，音视频处理对我们而言并不陌生。</p>
 <p>在上述列举的场景中，我们可以提取出一个玩音视频通用的模型：</p>
 <p><strong>A处采集</strong> –&gt; <strong>传输</strong> –&gt; <strong>B处播放</strong>。</p>
@@ -406,6 +406,7 @@
 <p>视频亦然，如下图所示：</p>
 <p><img src="/2017/08/14/iOS音视频处理学习笔记01/视频处理流程.png" alt="音频采集、传输播放模型"></p>
 <p>今天只做流程介绍，这两张图后续有详细介绍！</p>
+<h2 id="直播场景技术框架"><a href="#直播场景技术框架" class="headerlink" title="直播场景技术框架"></a>直播场景技术框架</h2><p>现在以直播为例，梳理一下整个过程以及涉及到的知识点。<br><img src="/2017/08/14/iOS音视频处理学习笔记01/直播.png" alt="直播技术框架"></p>
 <h2 id="音视频基础知识框图"><a href="#音视频基础知识框图" class="headerlink" title="音视频基础知识框图"></a>音视频基础知识框图</h2><p>一下框图是从雷霄华学者的<a href="http://blog.csdn.net/leixiaohua1020/article/details/18893769" target="_blank" rel="external">博客</a>提取出来的，很全面，重新整理一下，分享一下，可以对照其中学习：</p>
 <p><img src="/2017/08/14/iOS音视频处理学习笔记01/音视频学习框架.png" alt="音频采集、传输播放模型"></p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>弄清楚场景和知识体系之后，接下来就是找自己需要或者感兴趣的模块去学习了，just do it！</p>
@@ -581,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习背景"><span class="nav-number">1.</span> <span class="nav-text">学习背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#音视频处理基本流程"><span class="nav-number">2.</span> <span class="nav-text">音视频处理基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#音视频基础知识框图"><span class="nav-number">3.</span> <span class="nav-text">音视频基础知识框图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习背景"><span class="nav-number">1.</span> <span class="nav-text">学习背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理流程分析"><span class="nav-number">2.</span> <span class="nav-text">处理流程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#音视频处理基本流程"><span class="nav-number">3.</span> <span class="nav-text">音视频处理基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直播场景技术框架"><span class="nav-number">4.</span> <span class="nav-text">直播场景技术框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#音视频基础知识框图"><span class="nav-number">5.</span> <span class="nav-text">音视频基础知识框图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>
