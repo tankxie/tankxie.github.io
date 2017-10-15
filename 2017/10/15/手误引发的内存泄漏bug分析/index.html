@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="音视频," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -94,18 +94,24 @@
 
 
 
-<meta name="description" content="前言：本篇利用AVFoundation从摄像头获取视频数据。  从摄像头获取视频数据iOS设备调用摄像头，获取视频数据的方式有两种：UIImagePickerController和AVFoundation，下面分析对比一下两种方式的优劣。 实现过程音视频基础知识">
-<meta name="keywords" content="音视频">
+<meta name="description" content="描述：项目中的view controller B在执行pop操作之后回到view controller A，但是B没有释放，导致再次进入B页面的时候会出现一些异常，如下图所示。   1. review源码review A viewcontroller 中的代码 1234567891011121314@property (nonatomic,strong)WBOCRRecViewControlle">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS音视频处理02-获取视频流">
-<meta property="og:url" content="http://yoursite.com/2017/08/15/iOS音视频处理02-获取视频流/index.html">
+<meta property="og:title" content="手误引发的内存泄漏bug分析">
+<meta property="og:url" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/index.html">
 <meta property="og:site_name" content="tankxie&#39;s blogs">
-<meta property="og:description" content="前言：本篇利用AVFoundation从摄像头获取视频数据。  从摄像头获取视频数据iOS设备调用摄像头，获取视频数据的方式有两种：UIImagePickerController和AVFoundation，下面分析对比一下两种方式的优劣。 实现过程音视频基础知识">
+<meta property="og:description" content="描述：项目中的view controller B在执行pop操作之后回到view controller A，但是B没有释放，导致再次进入B页面的时候会出现一些异常，如下图所示。   1. review源码review A viewcontroller 中的代码 1234567891011121314@property (nonatomic,strong)WBOCRRecViewControlle">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-15T13:34:11.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/5.jpg">
+<meta property="og:updated_time" content="2017-10-15T15:10:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS音视频处理02-获取视频流">
-<meta name="twitter:description" content="前言：本篇利用AVFoundation从摄像头获取视频数据。  从摄像头获取视频数据iOS设备调用摄像头，获取视频数据的方式有两种：UIImagePickerController和AVFoundation，下面分析对比一下两种方式的优劣。 实现过程音视频基础知识">
+<meta name="twitter:title" content="手误引发的内存泄漏bug分析">
+<meta name="twitter:description" content="描述：项目中的view controller B在执行pop操作之后回到view controller A，但是B没有释放，导致再次进入B页面的时候会出现一些异常，如下图所示。   1. review源码review A viewcontroller 中的代码 1234567891011121314@property (nonatomic,strong)WBOCRRecViewControlle">
+<meta name="twitter:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/1.jpg">
 
 
 
@@ -134,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/15/iOS音视频处理02-获取视频流/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/"/>
 
 
 
 
 
-  <title>iOS音视频处理02-获取视频流 | tankxie's blogs</title>
+  <title>手误引发的内存泄漏bug分析 | tankxie's blogs</title>
   
 
 
@@ -283,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/15/iOS音视频处理02-获取视频流/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -300,7 +306,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">iOS音视频处理02-获取视频流</h1>
+          <h1 class="post-title" itemprop="name headline">手误引发的内存泄漏bug分析</h1>
         
 
         <div class="post-meta">
@@ -312,8 +318,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T21:21:26+08:00">
-                2017-08-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-15T22:29:03+08:00">
+                2017-10-15
               </time>
             
 
@@ -322,28 +328,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/音视频学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">音视频学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -373,10 +357,34 @@
 
       
         <blockquote>
-<p>前言：本篇利用AVFoundation从摄像头获取视频数据。</p>
+<p>描述：项目中的view controller B在执行pop操作之后回到view controller A，但是B没有释放，导致再次进入B页面的时候会出现一些异常，如下图所示。</p>
 </blockquote>
-<h2 id="从摄像头获取视频数据"><a href="#从摄像头获取视频数据" class="headerlink" title="从摄像头获取视频数据"></a>从摄像头获取视频数据</h2><p>iOS设备调用摄像头，获取视频数据的方式有两种：<code>UIImagePickerController</code>和<code>AVFoundation</code>，下面分析对比一下两种方式的优劣。</p>
-<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h2 id="音视频基础知识"><a href="#音视频基础知识" class="headerlink" title="音视频基础知识"></a>音视频基础知识</h2>
+<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/1.jpg" alt="情况介绍"></p>
+<h2 id="1-review源码"><a href="#1-review源码" class="headerlink" title="1. review源码"></a>1. review源码</h2><p>review A viewcontroller 中的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic,strong)WBOCRRecViewController *recVC;</div><div class="line"></div><div class="line">- (void)pushCameraToUpperSide:(BOOL)isUpper&#123;</div><div class="line">    // ...   </div><div class="line">    [self.navigationController pushViewController:self.recVC animated:YES];</div><div class="line">&#125;</div><div class="line">- (WBOCRRecViewController *)recVC&#123;</div><div class="line">    if (!_recVC) &#123;</div><div class="line">        _recVC = [[WBOCRRecViewController alloc]init];</div><div class="line">        _recVC.failedBlock = self.failedBlock;</div><div class="line">        _recVC.successBlock = self.successBlock;</div><div class="line">    &#125;</div><div class="line">    return _recVC;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>发现 A 持有了 B故从 B pop 到 A 的时候，不会释放 B，而业务逻辑是需要每次进入B的时候都初始化一次，那就改代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// @property (nonatomic,strong)WBOCRRecViewController *recVC;</div><div class="line"></div><div class="line">- (void)pushCameraToUpperSide:(BOOL)isUpper&#123;</div><div class="line">    WBOCRRecViewController *recVC = [[WBOCRRecViewController alloc]init];</div><div class="line">    [self.navigationController pushViewController:recVC animated:YES];</div><div class="line">&#125;</div><div class="line">//- (WBOCRRecViewController *)recVC&#123;</div><div class="line">//    if (!_recVC) &#123;</div><div class="line">//        _recVC = [[WBOCRRecViewController alloc]init];</div><div class="line">//        _recVC.failedBlock = self.failedBlock;</div><div class="line">//        _recVC.successBlock = self.successBlock;</div><div class="line">//    &#125;</div><div class="line">//    return _recVC;</div><div class="line">//&#125;</div></pre></td></tr></table></figure>
+<p>重新run，额，还是不行，难道还有别的对象持有B？<br>由于B中代码的property比较多，前后写代码的时间跨度比较大，review时间成本较高，那就借助工具咯！！！</p>
+<p>##2. 查看对象的实例之间的引用关系</p>
+<p>run项目，进入目标页面，在Xcode的控制面板点击图示按钮</p>
+<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/2.jpg" alt="查看引用关系"></p>
+<p>会出现如下页面，这些图示表示了引用情况</p>
+<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/3.jpg" alt="查看引用关系"></p>
+<p>找到目标对象，由于我之前操作了两次（从A页面进入B，再推出到A操作），这里出现了两个B对象，可以肯定的是，代码发生了内存泄漏</p>
+<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/4.jpg" alt="查看引用关系"></p>
+<p>点击任意一个B对象的实例进去查看详情，蓝色的块表示持有B的对象，桔色表示B，Quick look信息如下：</p>
+<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/6.jpg" alt="查看引用关系"><br><img src="/2017/10/15/手误引发的内存泄漏bug分析/5.jpg" alt="查看引用关系"></p>
+<p>到这儿，找到了罪魁祸首！！！接下来就是回到代码中，查看代码</p>
+<p>##3. 再review代码</p>
+<p>查看代码，发现自己写了这么一段代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@interface XXOCRStateManager : NSObject</div><div class="line"></div><div class="line">@property (nonatomic, strong) id&lt;XXOCRStateProtocol&gt; delegate;</div><div class="line"></div><div class="line">// ...</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>犯了一个低级错误，用了<code>strong</code>,将strong修改为weak，问题解决了。</p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><ul>
+<li>写代码时候细心，减少低级错误</li>
+<li>写代码之前，明确需求，再设计代码怎么写，否则会出现一些莫名其妙的bug</li>
+<li>善于借助一些工具来排查问题，可以提高效率</li>
+</ul>
+
       
     </div>
     
@@ -391,12 +399,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/音视频/" rel="tag"># 音视频</a>
-          
-        </div>
-      
 
       
       
@@ -406,8 +408,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/14/iOS开发者需要了解的C++01/" rel="next" title="iOS开发者需要了解的C++01">
-                <i class="fa fa-chevron-left"></i> iOS开发者需要了解的C++01
+              <a href="/2017/10/15/SDK性能优化-1/" rel="next" title="SDK性能优化(1)">
+                <i class="fa fa-chevron-left"></i> SDK性能优化(1)
               </a>
             
           </div>
@@ -415,10 +417,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/" rel="prev" title="SDK开发实践03：cocopods私有库管理代码">
-                SDK开发实践03：cocopods私有库管理代码 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -552,7 +550,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从摄像头获取视频数据"><span class="nav-number">1.</span> <span class="nav-text">从摄像头获取视频数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">2.</span> <span class="nav-text">实现过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#音视频基础知识"><span class="nav-number">3.</span> <span class="nav-text">音视频基础知识</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-review源码"><span class="nav-number">1.</span> <span class="nav-text">1. review源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-总结"><span class="nav-number">2.</span> <span class="nav-text">4. 总结</span></a></li></ol></div>
             
 
           </div>
