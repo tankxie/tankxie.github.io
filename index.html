@@ -325,6 +325,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SDK开发/" itemprop="url" rel="index">
+                    <span itemprop="name">SDK开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -354,7 +376,26 @@
       
         
           
-            
+            <h2 id="常见的内存泄露场景"><a href="#常见的内存泄露场景" class="headerlink" title="常见的内存泄露场景"></a>常见的内存泄露场景</h2><h2 id="内存泄露检测"><a href="#内存泄露检测" class="headerlink" title="内存泄露检测"></a>内存泄露检测</h2><blockquote>
+<p>本文是在Xcode9.0下利用Instrument中的Leak工具完成。</p>
+</blockquote>
+<h3 id="1-使用instrument检测内存泄露"><a href="#1-使用instrument检测内存泄露" class="headerlink" title="1. 使用instrument检测内存泄露"></a>1. 使用instrument检测内存泄露</h3><p>点击 Xcode &gt; Product &gt; Profile</p>
+<p><img src="/2017/10/15/SDK性能优化-1/1.png" alt="打开instrument"></p>
+<p>等到项目编译完成之后，系统会打开instrument，如下图所示：</p>
+<p><img src="/2017/10/15/SDK性能优化-1/2.jpg" alt="打开instrument"></p>
+<p>选择leak，点击choose按钮，进入内存检测页面</p>
+<p><img src="/2017/10/15/SDK性能优化-1/3.jpg" alt="打开instrument"></p>
+<p>点击左上角的录制按钮，开始录制，在你的手机上，操作目标APP，若出现图示红块，表明检测到了内存泄露，为了方便定位内存泄露点，排除系统堆栈的干扰，按照图示操作</p>
+<p><img src="/2017/10/15/SDK性能优化-1/4.jpg" alt="打开instrument"></p>
+<p>点击泄露处的堆栈信息，跳转到发生泄露的代码处</p>
+<p><img src="/2017/10/15/SDK性能优化-1/5.jpg" alt="打开instrument"></p>
+<p><img src="/2017/10/15/SDK性能优化-1/6.jpg" alt="打开instrument"></p>
+<p>分析代码，解决泄露问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CGRect imgRect = CGRectMake(0,0,CVPixelBufferGetWidth(pixelBuffer),                                            CVPixelBufferGetHeight(pixelBuffer));</div><div class="line">CGImageRef imgRef = [context createCGImage:ciImage fromRect:imgRect];</div><div class="line">UIImage *uiImage = [UIImage imageWithCGImage:imgRef];</div><div class="line">                [self.delegate preDetectedSucceed:uiImage];</div><div class="line">// 添加此行代码，释放imgRef             </div><div class="line">CGImageRelease(imgRef);</div></pre></td></tr></table></figure>
+<p>重新编译代码，重复上述操作，此处内存泄露问题解决了</p>
+<p>从上图不难看出，还有AFNetwork也出现了内存泄露，解决办法如下</p>
+<p>这就是利用instrument来进行内存泄露检测的整个流程</p>
+
           
         
       
@@ -1572,7 +1613,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
