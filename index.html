@@ -283,6 +283,457 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/15/SDK性能优化-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tank">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.vstou.com/upload/image/355/201606/1465004143320282.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tankxie's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/15/SDK性能优化-1/" itemprop="url">SDK性能优化(1)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-15T14:58:42+08:00">
+                2017-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tank">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.vstou.com/upload/image/355/201606/1465004143320282.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tankxie's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/" itemprop="url">SDK开发实践03：cocopods私有库管理代码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T19:01:03+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SDK开发/" itemprop="url" rel="index">
+                    <span itemprop="name">SDK开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>本文是这个系列文章的核心，本文会详细描述如何搭建cocopod私有库，提供一个step by step教程。</p>
+</blockquote>
+<p>本教程很多内容都是出自<a href="https://cocoapods.org/" target="_blank" rel="external">cocopods.org</a>，官网上东西也不是很多，建议有时间通读一下。</p>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>在使用和开发的过程中，会接触和使用一些关键的名词，这里做一个索引。</p>
+<h1 id="什么是cocoapods"><a href="#什么是cocoapods" class="headerlink" title="什么是cocoapods"></a>什么是cocoapods</h1><p>官网上给的解释如下</p>
+<blockquote>
+<p>CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects. It has over 36 thousand libraries and is used in over 2.4 million apps. CocoaPods can help you scale your projects elegantly.</p>
+</blockquote>
+<p>它是一个依赖管理（<strong>dependency manager</strong>）工具，可以很方便的帮你管理你项目的依赖。</p>
+<p>如果你是新手，“依赖”可以理解为：别人已经写好的现成的代码块，你直接调用就好。而cocopods充当的角色就是，帮助你把你需要的代码块拉到你的项目中来。</p>
+<p>是不是很炫酷！</p>
+<h1 id="安装cocoapods"><a href="#安装cocoapods" class="headerlink" title="安装cocoapods"></a>安装cocoapods</h1><p>CocoaPods是用Ruby构建的，Ruby在Mac OS X上安装默认的。建议使用默认的Ruby安装。</p>
+<p>使用默认的<code>Ruby</code>安装可能需要在安装gem时使用<code>sudo</code>。 有关安装说明请参考<a href="https://guides.cocoapods.org/using/getting-started.html#getting-started" target="_blank" rel="external">安装指南</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Xcode 7 + 8</div><div class="line">$ sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<h1 id="基础使用-–-使用cocopods公有库"><a href="#基础使用-–-使用cocopods公有库" class="headerlink" title="基础使用 – 使用cocopods公有库"></a>基础使用 – 使用cocopods公有库</h1><p>先讲一个使用示例，再讲原理！</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>假设我的项目中需要使用到<code>AFNetworking</code>、<code>ORStackView</code>以及<code>SwiftyJSON</code>三个开源库，现用cocopods来完成依赖。</p>
+<p>这里我们新建一个名为<code>TKTestCocopods</code>测试工程，用来演示如何在项目中使用cocopods。项目路径以及目录结构如下:</p>
+<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/2.png" alt=""></p>
+<h3 id="创建Podfile"><a href="#创建Podfile" class="headerlink" title="创建Podfile"></a>创建Podfile</h3><p>在工程文件<code>TKTestCocopods.xcodeproj</code>目录下，创建名为<code>Podfile</code>的文本文件，这个文件你可以理解为一个清单，cocopods会按照这个清单去为你的项目添加依赖。内容如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos;</div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">target &apos;TKTestCocopods&apos; do</div><div class="line">  pod &apos;AFNetworking&apos;, &apos;~&gt; 2.6&apos;</div><div class="line">  pod &apos;ORStackView&apos;, &apos;~&gt; 3.0&apos;</div><div class="line">  pod &apos;SwiftyJSON&apos;, &apos;~&gt; 2.3&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>目前你只要关注如下部分代码，这三句表明了<code>TKTestCocopods</code>z这个project所依赖库的名称和版本号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod &apos;AFNetworking&apos;, &apos;~&gt; 2.6&apos;</div><div class="line">pod &apos;ORStackView&apos;, &apos;~&gt; 3.0&apos;</div><div class="line">pod &apos;SwiftyJSON&apos;, &apos;~&gt; 2.3&apos;</div></pre></td></tr></table></figure>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>其余部分代码后续讲解其含义，编辑完成之后，我们可以为我们的项目安装依赖库了，运行<code>pod install</code>命令了：</p>
+<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
+<p>安装完成之后，目录下的文件如下：</p>
+<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/4.png" alt=""></p>
+<p>打开<code>TKTestCocopods.xcworkspace</code>文件，项目目录结构如下：</p>
+<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/5.png" alt=""></p>
+<h3 id="使用依赖库"><a href="#使用依赖库" class="headerlink" title="使用依赖库"></a>使用依赖库</h3><p>此时，你可以在你项目中导入你需要的依赖库了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;Reachability/Reachability.h&gt;</div></pre></td></tr></table></figure>
+<h2 id="深入"><a href="#深入" class="headerlink" title="深入"></a>深入</h2><h3 id="pod-install究竟做了些什么？"><a href="#pod-install究竟做了些什么？" class="headerlink" title="pod install究竟做了些什么？"></a>pod install究竟做了些什么？</h3><p>我们再回过头看看我们执行<code>pod install</code>的时候，输出的log信息:<br><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
+<p>把注意力集中在黄色文本信息上，我们不难发现，这条命令执行了如下五个操作：</p>
+<ul>
+<li><strong>Analyzing dependencies</strong>：分析依赖关系</li>
+<li><strong>Downloading dependencies</strong>：下载依赖</li>
+<li><strong>Generating Pods project</strong>：生成Pods工程</li>
+<li><strong>Integrating client project</strong>：整合项目工程和Pods工程</li>
+<li><strong>Sending stats</strong>：发送结果，此处是安装成功</li>
+</ul>
+<p>我们对install操作有了大致的了解，但还是不够详细，甚至有些疑惑。</p>
+<p>比如：Podfile里面写了3个依赖文件，为什么按照的时候显示安装了4个依赖库，多出来的<code>FLKAutoLayout</code>从何而来？</p>
+<p>此时就需要得到更详细的log信息了，查阅文档发现，几乎所有的pod命令都有一个可选参数<code>--verbose</code></p>
+<p>verbose是“详细”之意，我们不难猜出，加上这个参数之后，我们可以看到更多的命令执行的log信息，此时运行<code>pod install --verbose</code>命令，此时输出了大量log，我们按照上面的分类来分别解读这些log信息。</p>
+<h4 id="Analyzing-dependencies"><a href="#Analyzing-dependencies" class="headerlink" title="Analyzing dependencies"></a>Analyzing dependencies</h4><p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/7.png" alt=""></p>
+<p>这里面包含了4小步：</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/15/iOS音视频处理02-获取视频流/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tank">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.vstou.com/upload/image/355/201606/1465004143320282.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tankxie's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/15/iOS音视频处理02-获取视频流/" itemprop="url">iOS音视频处理02-获取视频流</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T21:21:26+08:00">
+                2017-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/音视频学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">音视频学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>前言：本篇利用AVFoundation从摄像头获取视频数据。</p>
+</blockquote>
+<h2 id="从摄像头获取视频数据"><a href="#从摄像头获取视频数据" class="headerlink" title="从摄像头获取视频数据"></a>从摄像头获取视频数据</h2><p>iOS设备调用摄像头，获取视频数据的方式有两种：<code>UIImagePickerController</code>和<code>AVFoundation</code>，下面分析对比一下两种方式的优劣。</p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h2 id="音视频基础知识"><a href="#音视频基础知识" class="headerlink" title="音视频基础知识"></a>音视频基础知识</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/iOS开发者需要了解的C++01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -702,6 +1153,197 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/SDK开发实践02：SDK接口设计原则/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tank">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://www.vstou.com/upload/image/355/201606/1465004143320282.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tankxie's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/14/SDK开发实践02：SDK接口设计原则/" itemprop="url">SDK开发实践02：SDK接口设计原则</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-14T21:16:34+08:00">
+                2017-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SDK开发/" itemprop="url" rel="index">
+                    <span itemprop="name">SDK开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇主要讲如下内容</p>
+<ul>
+<li>SDK接口设计原则</li>
+<li>SDK设计中的代码规范</li>
+</ul>
+<h2 id="SDK接口设计原则"><a href="#SDK接口设计原则" class="headerlink" title="SDK接口设计原则"></a>SDK接口设计原则</h2><h3 id="一、-遵循面向对象的设计原则"><a href="#一、-遵循面向对象的设计原则" class="headerlink" title="一、 遵循面向对象的设计原则"></a>一、 遵循面向对象的设计原则</h3><p>对于面向对象软件系统的设计而言，在支持可维护性的同时，提高系统的可复用性是一个至关重要的问题，如何同时提高一个软件系统的可维护性和可复用性是面向对象设计需要解决的核心问题之一。<br>在面向对象设计中，可维护性的复用是以设计原则为基础的。每一个原则都蕴含一些面向对象设计的思想，可以从不同的角度提升一个软件结构的设计水平。<br>最常见的7种面向对象设计原则如下：</p>
+<ul>
+<li>单一职责原则 (Single Responsibility Principle, SRP)</li>
+<li>开闭原则 (Open-Closed Principle, OCP)</li>
+<li>里氏代换原则 (Liskov Substitution Principle, LSP)</li>
+<li>依赖倒转原则 (Dependence Inversion Principle, DIP)</li>
+<li>接口隔离原则 (Interface Segregation Principle, ISP)</li>
+<li>合成复用原则 (Composite Reuse Principle, CRP)</li>
+<li>迪米特法则 (Law of Demeter, LoD)</li>
+</ul>
+<p>详细请参考<a href="https://quanke.gitbooks.io/design-pattern-java/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99.html" target="_blank" rel="external">面向对象设计原则</a>。</p>
+<h3 id="二、-实践"><a href="#二、-实践" class="headerlink" title="二、 实践"></a>二、 实践</h3><blockquote>
+<p>本篇设计的SDK名字为<code>XXXService</code>。</p>
+</blockquote>
+<h4 id="1-对外接口设计单例类，保证一个类仅有一个实例，并提供一个访问它的全局访问点"><a href="#1-对外接口设计单例类，保证一个类仅有一个实例，并提供一个访问它的全局访问点" class="headerlink" title="1. 对外接口设计单例类，保证一个类仅有一个实例，并提供一个访问它的全局访问点"></a>1. 对外接口设计单例类，保证一个类仅有一个实例，并提供一个访问它的全局访问点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @brief XXXService单例方法</div><div class="line"> *</div><div class="line"> * @return XXXService对象</div><div class="line"> */</div><div class="line">+ (nonnull instancetype) sharedService;</div></pre></td></tr></table></figure>
+<h4 id="2-头文件设计"><a href="#2-头文件设计" class="headerlink" title="2. 头文件设计"></a>2. 头文件设计</h4><p>按照个人习惯，一般会暴露<code>XXXService.h</code>,<code>XXXConfig.h</code>和<code>XXXModel.h</code>中的一个或多个头文件给外部。<br>顾名思义，一个提供SDK入口，一个提供SDK配置，一个提供SDK数据模型。</p>
+<h4 id="3-入口方法的设计"><a href="#3-入口方法的设计" class="headerlink" title="3. 入口方法的设计"></a>3. 入口方法的设计</h4><p>第三方APP和SDK之间的数据传递：</p>
+<ul>
+<li>第三方在调起SDK的时候需要向SDK传递参数</li>
+<li>SDK在调用完成之后需要给结果数据到第三方</li>
+</ul>
+<p><img src="/2017/08/14/SDK开发实践02：SDK接口设计原则/2.png" alt="命名前缀前缀"></p>
+<p>前者可以通过<strong>实例方法的参</strong>数或者<strong>@property</strong>两种方法实现；<br>后者一般可以通过<strong>delegate</strong>或者<strong>block</strong>两种方法来实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* @brief 调起SDK入口方法</div><div class="line"></div><div class="line">* @param manageVC          SDK的入口页面对应的view controller</div><div class="line">* @param config            配置参数</div><div class="line">* @param delegate          代理</div><div class="line">* ...</div><div class="line">* @param startSucceed      启动SDK成功回调</div><div class="line">* @param failed            启动SDK异常回调</div><div class="line">*/</div><div class="line">typedef void(^XXXServiceStartSucceedBlock)();</div><div class="line">typedef void(^XXXServiceFailedBlock) (NSError * _Nonnull error);</div><div class="line"></div><div class="line">- (void)startXXXServiceWithManageVC:(nonnull UIViewController *)manageVc</div><div class="line">                             config:(nullable XXXConfig *)config</div><div class="line">                           delegate:(nonnull id) delegate</div><div class="line">                              appId:(nonnull NSString *)appId</div><div class="line">                              nonce:(nonnull NSString *)nonce</div><div class="line">                             userId:(nonnull NSString *)userId</div><div class="line">                               sign:(nonnull NSString*)sign</div><div class="line">                            orderNo:(nonnull NSString *)orderNo</div><div class="line">                       startSucceed:(nullable XXXServiceStartSucceedBlock)startSucceed</div><div class="line">                             failed:(nullable XXXServiceFailedBlock)failed;</div><div class="line">// 外部主动退出SDK方法</div><div class="line">- (void)stopService;</div></pre></td></tr></table></figure>
+<p>个人比较倾向于，把启动SDK需要的参数，放在启动方法的参数里面，并用<code>nullable</code>和<code>nonnull</code>来表示必传参数和可选参数。</p>
+<p>然后用<code>startSucceed</code>和<code>failed</code>两个block来分别传递调起SDK成功和失败回调信息。</p>
+<p>用delegate向外传递业务结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@protocol XXXProtocol &lt;NSObject&gt;</div><div class="line">- (void)XXXServiceWillExitWith:(XXXModel *)info;</div><div class="line">- (void)XXXServiceDidExitWith:(XXXModel *)info;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<h2 id="SDK编码命名规范"><a href="#SDK编码命名规范" class="headerlink" title="SDK编码命名规范"></a>SDK编码命名规范</h2><h3 id="iOS编码规范"><a href="#iOS编码规范" class="headerlink" title="iOS编码规范"></a>iOS编码规范</h3><p>iOS编码权威规范参考<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html" target="_blank" rel="external">Introduction to Coding Guidelines for Cocoa</a>。</p>
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p>针对SDK输出过程中遇到的一些问题，总结下面几条：</p>
+<h4 id="注意前缀命名规范"><a href="#注意前缀命名规范" class="headerlink" title="注意前缀命名规范"></a>注意前缀命名规范</h4><p>冲突从两个范畴来讲：</p>
+<ul>
+<li>内部业务模块之间</li>
+</ul>
+<p><img src="/2017/08/14/SDK开发实践02：SDK接口设计原则/1.png" alt="命名前缀前缀"></p>
+<p>需要注意的有类名以及bundle名。<br>这样可以避免代码和外部代码以及内部其它产品代码冲突。<br>在SDK输出打包的时候对所包含的类名统一加前缀，这一part在后面cocopod打包的时候说。</p>
+<h4 id="category的使用"><a href="#category的使用" class="headerlink" title="category的使用"></a>category的使用</h4><p>不建议在SDK内部使用category，category会load到外部的方法，举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// SDK 内部使用了一个UIColor的category</div><div class="line">// 支持的颜色格式是@&quot;ffffff&quot;，只支持这种输入。</div><div class="line">- (void)colorWithString:(NSString *)color;</div><div class="line"></div><div class="line">// 外部APP也有一个UIColor的category</div><div class="line">// 但支持的颜色格式是@&quot;0xffffff&quot;</div><div class="line">- (void)colorWithString:(NSString *)color;</div><div class="line"></div><div class="line">// 外部APP在调用的时候</div><div class="line">[UIColor colorWithString:@&quot;0x000000&quot;];</div></pre></td></tr></table></figure>
+<p>这样就有可能gg了，可能会出现颜色设置不上去，甚至是cash。<br>解决方案有二：<br>一是，在SDK里面不用category；<br>二是，万一要用，对方法加前缀吧,类似这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)wb_colorWithString:(NSString *)color;</div></pre></td></tr></table></figure>
+<h2 id="SDK对UI的处理"><a href="#SDK对UI的处理" class="headerlink" title="SDK对UI的处理"></a>SDK对UI的处理</h2><h3 id="SDK出现的形式"><a href="#SDK出现的形式" class="headerlink" title="SDK出现的形式"></a>SDK出现的形式</h3><p>一般SDK页面会提供，两种SDK页面出现的方式：</p>
+<ul>
+<li>push页面</li>
+<li>present页面</li>
+</ul>
+<h3 id="对navigation-bar这种全局UI的处理"><a href="#对navigation-bar这种全局UI的处理" class="headerlink" title="对navigation bar这种全局UI的处理"></a>对navigation bar这种全局UI的处理</h3><p>不污染原则，修改完之后要复原。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/iOS音视频处理学习笔记01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -908,7 +1550,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -930,7 +1572,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
