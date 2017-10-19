@@ -377,11 +377,22 @@
 <p>查看代码，发现自己写了这么一段代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@interface XXOCRStateManager : NSObject</div><div class="line"></div><div class="line">@property (nonatomic, strong) id&lt;XXOCRStateProtocol&gt; delegate;</div><div class="line"></div><div class="line">// ...</div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>犯了一个低级错误，用了<code>strong</code>,将strong修改为weak，问题解决了。</p>
-<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><ul>
-<li>写代码时候细心，减少低级错误</li>
-<li>写代码之前，明确需求，再设计代码怎么写，否则会出现一些莫名其妙的bug</li>
-<li>善于借助一些工具来排查问题，可以提高效率</li>
-</ul>
+<h2 id="4-顺藤摸瓜"><a href="#4-顺藤摸瓜" class="headerlink" title="4. 顺藤摸瓜"></a>4. 顺藤摸瓜</h2><p>开发中发现了一个问题，就是识别控制器上的view蒙层走不到<code>dealloc</code>方法里面去，重复“识别”、“退出识别”步骤，果不其然，系统内存留了多个maskview实例。那就是内存泄露了咯！</p>
+<p>回溯代码，发现在识别控制器退出的时候写了这么一行代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.maskView = nil;</div></pre></td></tr></table></figure>
+<p>很显然没能如愿以偿的释放maskview对象，下面介绍另一个内存泄漏检测的工具</p>
+<h2 id="5-更好用的检测工具-MLeaksFinder"><a href="#5-更好用的检测工具-MLeaksFinder" class="headerlink" title="5. 更好用的检测工具 MLeaksFinder"></a>5. 更好用的检测工具 MLeaksFinder</h2><p><code>MLeaksFinder</code>是微信读书团队开源的一个内存检测工具，使用及其简单，把 MLeaksFinder 目录下的文件添加到你的项目中，就可以在运行时（debug 模式下）帮助你检测项目里的内存泄露了，无需修改任何业务逻辑代码，而且只在 debug 下开启，完全不影响你的 release 包，不污染代码</p>
+<p>debug的时候，检测到代码内存泄漏后，console和界面上都会有输出提示，如下图</p>
+<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/7.png" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/8.png" alt="查看引用关系"></p>
+<p>不难看出是由于timer导致的，回到代码中，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (void)dealloc&#123;</div><div class="line">    NSLog(@&quot;mask view dealloc!!!&quot;);</div><div class="line">    [self.lineViewTimer invalidate];</div><div class="line">    self.lineViewTimer = nil;</div><div class="line">    [self removeObjectForNotification];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之前释放timer的方法写在dealloc方法里面，问题是没有release timer，就走不进dealloc方法里面去！！！</p>
+<p>改进方法，增加一个releaseSource方法，在释放maskview对象之前调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (void)releaseSource&#123;</div><div class="line">    [self.lineViewTimer invalidate];</div><div class="line">    self.lineViewTimer = nil;</div><div class="line">    [self removeObjectForNotification];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[self.maskView releaseSource];</div><div class="line">self.maskView = nil;</div></pre></td></tr></table></figure>
+<p>OK，重新run代码，终于，代码走进了dealloc方法里面！</p>
+<h2 id="6-未完待续"><a href="#6-未完待续" class="headerlink" title="6.未完待续"></a>6.未完待续</h2><p>这记录了开发过程中遇到的一个内存泄漏的问题，简单记录了发现问题和解决问题的思路和方法，后续有时间了做一下原理层次的分析，总结经验，避免同样的坑踩多次！</p>
 
           
         
