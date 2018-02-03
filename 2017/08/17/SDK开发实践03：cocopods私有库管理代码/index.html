@@ -98,21 +98,21 @@
 <meta name="keywords" content="SDK,cocoapods,组件化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SDK开发实践03：cocopods私有库管理代码">
-<meta property="og:url" content="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/index.html">
 <meta property="og:site_name" content="tankxie&#39;s blogs">
 <meta property="og:description" content="本文是这个系列文章的核心，本文会详细描述如何搭建cocopod私有库，提供一个step by step教程。  本教程很多内容都是出自cocopods.org，官网上东西也不是很多，建议有时间通读一下。 索引在使用和开发的过程中，会接触和使用一些关键的名词，这里做一个索引。 什么是cocoapods官网上给的解释如下  CocoaPods is a dependency manager for">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/2.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/3.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/4.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/5.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/3.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/7.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/2.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/3.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/4.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/5.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/3.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/7.png">
 <meta property="og:updated_time" content="2017-08-18T13:12:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SDK开发实践03：cocopods私有库管理代码">
 <meta name="twitter:description" content="本文是这个系列文章的核心，本文会详细描述如何搭建cocopod私有库，提供一个step by step教程。  本教程很多内容都是出自cocopods.org，官网上东西也不是很多，建议有时间通读一下。 索引在使用和开发的过程中，会接触和使用一些关键的名词，这里做一个索引。 什么是cocoapods官网上给的解释如下  CocoaPods is a dependency manager for">
-<meta name="twitter:image" content="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/2.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/2.png">
 
 
 
@@ -141,7 +141,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/"/>
 
 
 
@@ -290,7 +290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -397,20 +397,20 @@
 <h1 id="基础使用-–-使用cocopods公有库"><a href="#基础使用-–-使用cocopods公有库" class="headerlink" title="基础使用 – 使用cocopods公有库"></a>基础使用 – 使用cocopods公有库</h1><p>先讲一个使用示例，再讲原理！</p>
 <h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>假设我的项目中需要使用到<code>AFNetworking</code>、<code>ORStackView</code>以及<code>SwiftyJSON</code>三个开源库，现用cocopods来完成依赖。</p>
 <p>这里我们新建一个名为<code>TKTestCocopods</code>测试工程，用来演示如何在项目中使用cocopods。项目路径以及目录结构如下:</p>
-<p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/2.png" alt=""></p>
+<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/2.png" alt=""></p>
 <h3 id="创建Podfile"><a href="#创建Podfile" class="headerlink" title="创建Podfile"></a>创建Podfile</h3><p>在工程文件<code>TKTestCocopods.xcodeproj</code>目录下，创建名为<code>Podfile</code>的文本文件，这个文件你可以理解为一个清单，cocopods会按照这个清单去为你的项目添加依赖。内容如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos;</div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">target &apos;TKTestCocopods&apos; do</div><div class="line">  pod &apos;AFNetworking&apos;, &apos;~&gt; 2.6&apos;</div><div class="line">  pod &apos;ORStackView&apos;, &apos;~&gt; 3.0&apos;</div><div class="line">  pod &apos;SwiftyJSON&apos;, &apos;~&gt; 2.3&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
 <p>目前你只要关注如下部分代码，这三句表明了<code>TKTestCocopods</code>z这个project所依赖库的名称和版本号：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod &apos;AFNetworking&apos;, &apos;~&gt; 2.6&apos;</div><div class="line">pod &apos;ORStackView&apos;, &apos;~&gt; 3.0&apos;</div><div class="line">pod &apos;SwiftyJSON&apos;, &apos;~&gt; 2.3&apos;</div></pre></td></tr></table></figure>
 <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>其余部分代码后续讲解其含义，编辑完成之后，我们可以为我们的项目安装依赖库了，运行<code>pod install</code>命令了：</p>
-<p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
+<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
 <p>安装完成之后，目录下的文件如下：</p>
-<p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/4.png" alt=""></p>
+<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/4.png" alt=""></p>
 <p>打开<code>TKTestCocopods.xcworkspace</code>文件，项目目录结构如下：</p>
-<p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/5.png" alt=""></p>
+<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/5.png" alt=""></p>
 <h3 id="使用依赖库"><a href="#使用依赖库" class="headerlink" title="使用依赖库"></a>使用依赖库</h3><p>此时，你可以在你项目中导入你需要的依赖库了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;Reachability/Reachability.h&gt;</div></pre></td></tr></table></figure>
-<h2 id="深入"><a href="#深入" class="headerlink" title="深入"></a>深入</h2><h3 id="pod-install究竟做了些什么？"><a href="#pod-install究竟做了些什么？" class="headerlink" title="pod install究竟做了些什么？"></a>pod install究竟做了些什么？</h3><p>我们再回过头看看我们执行<code>pod install</code>的时候，输出的log信息:<br><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
+<h2 id="深入"><a href="#深入" class="headerlink" title="深入"></a>深入</h2><h3 id="pod-install究竟做了些什么？"><a href="#pod-install究竟做了些什么？" class="headerlink" title="pod install究竟做了些什么？"></a>pod install究竟做了些什么？</h3><p>我们再回过头看看我们执行<code>pod install</code>的时候，输出的log信息:<br><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
 <p>把注意力集中在黄色文本信息上，我们不难发现，这条命令执行了如下五个操作：</p>
 <ul>
 <li><strong>Analyzing dependencies</strong>：分析依赖关系</li>
@@ -423,7 +423,7 @@
 <p>比如：Podfile里面写了3个依赖文件，为什么按照的时候显示安装了4个依赖库，多出来的<code>FLKAutoLayout</code>从何而来？</p>
 <p>此时就需要得到更详细的log信息了，查阅文档发现，几乎所有的pod命令都有一个可选参数<code>--verbose</code></p>
 <p>verbose是“详细”之意，我们不难猜出，加上这个参数之后，我们可以看到更多的命令执行的log信息，此时运行<code>pod install --verbose</code>命令，此时输出了大量log，我们按照上面的分类来分别解读这些log信息。</p>
-<h4 id="Analyzing-dependencies"><a href="#Analyzing-dependencies" class="headerlink" title="Analyzing dependencies"></a>Analyzing dependencies</h4><p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/7.png" alt=""></p>
+<h4 id="Analyzing-dependencies"><a href="#Analyzing-dependencies" class="headerlink" title="Analyzing dependencies"></a>Analyzing dependencies</h4><p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/7.png" alt=""></p>
 <p>这里面包含了4小步：</p>
 
       
@@ -459,7 +459,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/15/音视频/iOS音视频处理02-获取视频流/" rel="next" title="iOS音视频处理02-获取视频流">
+              <a href="/2017/08/15/iOS音视频处理02-获取视频流/" rel="next" title="iOS音视频处理02-获取视频流">
                 <i class="fa fa-chevron-left"></i> iOS音视频处理02-获取视频流
               </a>
             
@@ -469,7 +469,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/15/SDK/SDK性能优化-1/" rel="prev" title="SDK性能优化(1)">
+              <a href="/2017/10/15/SDK性能优化-1/" rel="prev" title="SDK性能优化(1)">
                 SDK性能优化(1) <i class="fa fa-chevron-right"></i>
               </a>
             

@@ -98,17 +98,17 @@
 <meta name="keywords" content="SDK,cocoapods,组件化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SDK开发实践02：SDK接口设计原则">
-<meta property="og:url" content="http://yoursite.com/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/08/14/SDK开发实践02：SDK接口设计原则/index.html">
 <meta property="og:site_name" content="tankxie&#39;s blogs">
 <meta property="og:description" content="前言本篇主要讲如下内容  SDK接口设计原则 SDK设计中的代码规范  SDK接口设计原则一、 遵循面向对象的设计原则对于面向对象软件系统的设计而言，在支持可维护性的同时，提高系统的可复用性是一个至关重要的问题，如何同时提高一个软件系统的可维护性和可复用性是面向对象设计需要解决的核心问题之一。在面向对象设计中，可维护性的复用是以设计原则为基础的。每一个原则都蕴含一些面向对象设计的思想，可以从不同的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/2.png">
-<meta property="og:image" content="http://yoursite.com/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/1.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/14/SDK开发实践02：SDK接口设计原则/2.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/14/SDK开发实践02：SDK接口设计原则/1.png">
 <meta property="og:updated_time" content="2017-08-17T10:59:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SDK开发实践02：SDK接口设计原则">
 <meta name="twitter:description" content="前言本篇主要讲如下内容  SDK接口设计原则 SDK设计中的代码规范  SDK接口设计原则一、 遵循面向对象的设计原则对于面向对象软件系统的设计而言，在支持可维护性的同时，提高系统的可复用性是一个至关重要的问题，如何同时提高一个软件系统的可维护性和可复用性是面向对象设计需要解决的核心问题之一。在面向对象设计中，可维护性的复用是以设计原则为基础的。每一个原则都蕴含一些面向对象设计的思想，可以从不同的">
-<meta name="twitter:image" content="http://yoursite.com/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/2.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/14/SDK开发实践02：SDK接口设计原则/2.png">
 
 
 
@@ -137,7 +137,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/14/SDK开发实践02：SDK接口设计原则/"/>
 
 
 
@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/SDK开发实践02：SDK接口设计原则/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -401,7 +401,7 @@
 <li>第三方在调起SDK的时候需要向SDK传递参数</li>
 <li>SDK在调用完成之后需要给结果数据到第三方</li>
 </ul>
-<p><img src="/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/2.png" alt="命名前缀前缀"></p>
+<p><img src="/2017/08/14/SDK开发实践02：SDK接口设计原则/2.png" alt="命名前缀前缀"></p>
 <p>前者可以通过<strong>实例方法的参</strong>数或者<strong>@property</strong>两种方法实现；<br>后者一般可以通过<strong>delegate</strong>或者<strong>block</strong>两种方法来实现。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* @brief 调起SDK入口方法</div><div class="line"></div><div class="line">* @param manageVC          SDK的入口页面对应的view controller</div><div class="line">* @param config            配置参数</div><div class="line">* @param delegate          代理</div><div class="line">* ...</div><div class="line">* @param startSucceed      启动SDK成功回调</div><div class="line">* @param failed            启动SDK异常回调</div><div class="line">*/</div><div class="line">typedef void(^XXXServiceStartSucceedBlock)();</div><div class="line">typedef void(^XXXServiceFailedBlock) (NSError * _Nonnull error);</div><div class="line"></div><div class="line">- (void)startXXXServiceWithManageVC:(nonnull UIViewController *)manageVc</div><div class="line">                             config:(nullable XXXConfig *)config</div><div class="line">                           delegate:(nonnull id) delegate</div><div class="line">                              appId:(nonnull NSString *)appId</div><div class="line">                              nonce:(nonnull NSString *)nonce</div><div class="line">                             userId:(nonnull NSString *)userId</div><div class="line">                               sign:(nonnull NSString*)sign</div><div class="line">                            orderNo:(nonnull NSString *)orderNo</div><div class="line">                       startSucceed:(nullable XXXServiceStartSucceedBlock)startSucceed</div><div class="line">                             failed:(nullable XXXServiceFailedBlock)failed;</div><div class="line">// 外部主动退出SDK方法</div><div class="line">- (void)stopService;</div></pre></td></tr></table></figure>
 <p>个人比较倾向于，把启动SDK需要的参数，放在启动方法的参数里面，并用<code>nullable</code>和<code>nonnull</code>来表示必传参数和可选参数。</p>
@@ -413,7 +413,7 @@
 <ul>
 <li>内部业务模块之间</li>
 </ul>
-<p><img src="/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/1.png" alt="命名前缀前缀"></p>
+<p><img src="/2017/08/14/SDK开发实践02：SDK接口设计原则/1.png" alt="命名前缀前缀"></p>
 <p>需要注意的有类名以及bundle名。<br>这样可以避免代码和外部代码以及内部其它产品代码冲突。<br>在SDK输出打包的时候对所包含的类名统一加前缀，这一part在后面cocopod打包的时候说。</p>
 <h4 id="category的使用"><a href="#category的使用" class="headerlink" title="category的使用"></a>category的使用</h4><p>不建议在SDK内部使用category，category会load到外部的方法，举个例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// SDK 内部使用了一个UIColor的category</div><div class="line">// 支持的颜色格式是@&quot;ffffff&quot;，只支持这种输入。</div><div class="line">- (void)colorWithString:(NSString *)color;</div><div class="line"></div><div class="line">// 外部APP也有一个UIColor的category</div><div class="line">// 但支持的颜色格式是@&quot;0xffffff&quot;</div><div class="line">- (void)colorWithString:(NSString *)color;</div><div class="line"></div><div class="line">// 外部APP在调用的时候</div><div class="line">[UIColor colorWithString:@&quot;0x000000&quot;];</div></pre></td></tr></table></figure>
@@ -459,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/14/音视频/iOS音视频处理学习笔记01/" rel="next" title="iOS音视频处理学习笔记01">
-                <i class="fa fa-chevron-left"></i> iOS音视频处理学习笔记01
+              <a href="/2017/08/14/SDK开发实践01：开篇/" rel="next" title="SDK开发实践01：开篇">
+                <i class="fa fa-chevron-left"></i> SDK开发实践01：开篇
               </a>
             
           </div>
@@ -469,8 +469,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/14/SDK/SDK开发实践01：开篇/" rel="prev" title="SDK开发实践01：开篇">
-                SDK开发实践01：开篇 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/14/iOS开发者需要了解的C++01/" rel="prev" title="iOS开发者需要了解的C++01">
+                iOS开发者需要了解的C++01 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
