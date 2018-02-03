@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/Swift学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/Swift/Swift学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -302,7 +302,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/02/Swift学习笔记/" itemprop="url">Swift学习笔记</a></h1>
+                <a class="post-title-link" href="/2018/02/02/Swift/Swift学习笔记/" itemprop="url">Swift学习笔记</a></h1>
         
 
         <div class="post-meta">
@@ -402,7 +402,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/Swift学习笔记-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/Swift/Swift学习笔记-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -421,7 +421,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/02/Swift学习笔记-1/" itemprop="url">Swift学习笔记-1</a></h1>
+                <a class="post-title-link" href="/2018/02/02/Swift/Swift学习笔记-1/" itemprop="url">Swift学习笔记-1</a></h1>
         
 
         <div class="post-meta">
@@ -669,7 +669,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -688,7 +688,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/15/手误引发的内存泄漏bug分析/" itemprop="url">手误引发的内存泄漏bug分析</a></h1>
+                <a class="post-title-link" href="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/" itemprop="url">手误引发的内存泄漏bug分析</a></h1>
         
 
         <div class="post-meta">
@@ -743,7 +743,7 @@
             <blockquote>
 <p>描述：项目中的view controller B在执行pop操作之后回到view controller A，但是B没有释放，导致再次进入B页面的时候会出现一些异常，如下图所示。</p>
 </blockquote>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/1.jpg" alt="情况介绍"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/1.jpg" alt="情况介绍"></p>
 <h2 id="1-review源码"><a href="#1-review源码" class="headerlink" title="1. review源码"></a>1. review源码</h2><p>review A viewcontroller 中的代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic,strong)WBOCRRecViewController *recVC;</div><div class="line"></div><div class="line">- (void)pushCameraToUpperSide:(BOOL)isUpper&#123;</div><div class="line">    // ...   </div><div class="line">    [self.navigationController pushViewController:self.recVC animated:YES];</div><div class="line">&#125;</div><div class="line">- (WBOCRRecViewController *)recVC&#123;</div><div class="line">    if (!_recVC) &#123;</div><div class="line">        _recVC = [[WBOCRRecViewController alloc]init];</div><div class="line">        _recVC.failedBlock = self.failedBlock;</div><div class="line">        _recVC.successBlock = self.successBlock;</div><div class="line">    &#125;</div><div class="line">    return _recVC;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>发现 A 持有了 B故从 B pop 到 A 的时候，不会释放 B，而业务逻辑是需要每次进入B的时候都初始化一次，那就改代码如下：</p>
@@ -751,13 +751,13 @@
 <p>重新run，额，还是不行，难道还有别的对象持有B？<br>由于B中代码的property比较多，前后写代码的时间跨度比较大，review时间成本较高，那就借助工具咯！！！</p>
 <p>##2. 查看对象的实例之间的引用关系</p>
 <p>run项目，进入目标页面，在Xcode的控制面板点击图示按钮</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/2.jpg" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/2.jpg" alt="查看引用关系"></p>
 <p>会出现如下页面，这些图示表示了引用情况</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/3.jpg" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/3.jpg" alt="查看引用关系"></p>
 <p>找到目标对象，由于我之前操作了两次（从A页面进入B，再推出到A操作），这里出现了两个B对象，可以肯定的是，代码发生了内存泄漏</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/4.jpg" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/4.jpg" alt="查看引用关系"></p>
 <p>点击任意一个B对象的实例进去查看详情，蓝色的块表示持有B的对象，桔色表示B，Quick look信息如下：</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/6.jpg" alt="查看引用关系"><br><img src="/2017/10/15/手误引发的内存泄漏bug分析/5.jpg" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/6.jpg" alt="查看引用关系"><br><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/5.jpg" alt="查看引用关系"></p>
 <p>到这儿，找到了罪魁祸首！！！接下来就是回到代码中，查看代码</p>
 <p>##3. 再review代码</p>
 <p>查看代码，发现自己写了这么一段代码</p>
@@ -769,8 +769,8 @@
 <p>很显然没能如愿以偿的释放maskview对象，下面介绍另一个内存泄漏检测的工具</p>
 <h2 id="5-更好用的检测工具-MLeaksFinder"><a href="#5-更好用的检测工具-MLeaksFinder" class="headerlink" title="5. 更好用的检测工具 MLeaksFinder"></a>5. 更好用的检测工具 MLeaksFinder</h2><p><code>MLeaksFinder</code>是微信读书团队开源的一个内存检测工具，使用及其简单，把 MLeaksFinder 目录下的文件添加到你的项目中，就可以在运行时（debug 模式下）帮助你检测项目里的内存泄露了，无需修改任何业务逻辑代码，而且只在 debug 下开启，完全不影响你的 release 包，不污染代码</p>
 <p>debug的时候，检测到代码内存泄漏后，console和界面上都会有输出提示，如下图</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/7.png" alt="查看引用关系"></p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/8.png" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/7.png" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/8.png" alt="查看引用关系"></p>
 <p>不难看出是由于timer导致的，回到代码中，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (void)dealloc&#123;</div><div class="line">    NSLog(@&quot;mask view dealloc!!!&quot;);</div><div class="line">    [self.lineViewTimer invalidate];</div><div class="line">    self.lineViewTimer = nil;</div><div class="line">    [self removeObjectForNotification];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>之前释放timer的方法写在dealloc方法里面，问题是没有release timer，就走不进dealloc方法里面去！！！</p>
@@ -827,7 +827,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/15/SDK性能优化-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/15/SDK/SDK性能优化-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -846,7 +846,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/15/SDK性能优化-1/" itemprop="url">SDK性能优化(1)</a></h1>
+                <a class="post-title-link" href="/2017/10/15/SDK/SDK性能优化-1/" itemprop="url">SDK性能优化(1)</a></h1>
         
 
         <div class="post-meta">
@@ -924,16 +924,16 @@
 <p>本文是在Xcode9.0下利用Instrument中的Leak工具完成。</p>
 </blockquote>
 <h3 id="1-使用instrument检测内存泄露"><a href="#1-使用instrument检测内存泄露" class="headerlink" title="1. 使用instrument检测内存泄露"></a>1. 使用instrument检测内存泄露</h3><p>点击 Xcode &gt; Product &gt; Profile</p>
-<p><img src="/2017/10/15/SDK性能优化-1/1.png" alt="打开instrument"></p>
+<p><img src="/2017/10/15/SDK/SDK性能优化-1/1.png" alt="打开instrument"></p>
 <p>等到项目编译完成之后，系统会打开instrument，如下图所示：</p>
-<p><img src="/2017/10/15/SDK性能优化-1/2.jpg" alt="打开instrument"></p>
+<p><img src="/2017/10/15/SDK/SDK性能优化-1/2.jpg" alt="打开instrument"></p>
 <p>选择leak，点击choose按钮，进入内存检测页面</p>
-<p><img src="/2017/10/15/SDK性能优化-1/3.jpg" alt="打开instrument"></p>
+<p><img src="/2017/10/15/SDK/SDK性能优化-1/3.jpg" alt="打开instrument"></p>
 <p>点击左上角的录制按钮，开始录制，在你的手机上，操作目标APP，若出现图示红块，表明检测到了内存泄露，为了方便定位内存泄露点，排除系统堆栈的干扰，按照图示操作</p>
-<p><img src="/2017/10/15/SDK性能优化-1/4.jpg" alt="打开instrument"></p>
+<p><img src="/2017/10/15/SDK/SDK性能优化-1/4.jpg" alt="打开instrument"></p>
 <p>点击泄露处的堆栈信息，跳转到发生泄露的代码处</p>
-<p><img src="/2017/10/15/SDK性能优化-1/5.jpg" alt="打开instrument"></p>
-<p><img src="/2017/10/15/SDK性能优化-1/6.jpg" alt="打开instrument"></p>
+<p><img src="/2017/10/15/SDK/SDK性能优化-1/5.jpg" alt="打开instrument"></p>
+<p><img src="/2017/10/15/SDK/SDK性能优化-1/6.jpg" alt="打开instrument"></p>
 <p>分析代码，解决泄露问题</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CGRect imgRect = CGRectMake(0,0,CVPixelBufferGetWidth(pixelBuffer),                                            CVPixelBufferGetHeight(pixelBuffer));</div><div class="line">CGImageRef imgRef = [context createCGImage:ciImage fromRect:imgRect];</div><div class="line">UIImage *uiImage = [UIImage imageWithCGImage:imgRef];</div><div class="line">                [self.delegate preDetectedSucceed:uiImage];</div><div class="line">// 添加此行代码，释放imgRef             </div><div class="line">CGImageRelease(imgRef);</div></pre></td></tr></table></figure>
 <p>重新编译代码，重复上述操作，此处内存泄露问题解决了</p>
@@ -987,7 +987,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/SDK开发实践03：cocopods私有库管理代码/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -1006,7 +1006,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/" itemprop="url">SDK开发实践03：cocopods私有库管理代码</a></h1>
+                <a class="post-title-link" href="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/" itemprop="url">SDK开发实践03：cocopods私有库管理代码</a></h1>
         
 
         <div class="post-meta">
@@ -1098,20 +1098,20 @@
 <h1 id="基础使用-–-使用cocopods公有库"><a href="#基础使用-–-使用cocopods公有库" class="headerlink" title="基础使用 – 使用cocopods公有库"></a>基础使用 – 使用cocopods公有库</h1><p>先讲一个使用示例，再讲原理！</p>
 <h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>假设我的项目中需要使用到<code>AFNetworking</code>、<code>ORStackView</code>以及<code>SwiftyJSON</code>三个开源库，现用cocopods来完成依赖。</p>
 <p>这里我们新建一个名为<code>TKTestCocopods</code>测试工程，用来演示如何在项目中使用cocopods。项目路径以及目录结构如下:</p>
-<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/2.png" alt=""></p>
+<p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/2.png" alt=""></p>
 <h3 id="创建Podfile"><a href="#创建Podfile" class="headerlink" title="创建Podfile"></a>创建Podfile</h3><p>在工程文件<code>TKTestCocopods.xcodeproj</code>目录下，创建名为<code>Podfile</code>的文本文件，这个文件你可以理解为一个清单，cocopods会按照这个清单去为你的项目添加依赖。内容如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos;</div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">target &apos;TKTestCocopods&apos; do</div><div class="line">  pod &apos;AFNetworking&apos;, &apos;~&gt; 2.6&apos;</div><div class="line">  pod &apos;ORStackView&apos;, &apos;~&gt; 3.0&apos;</div><div class="line">  pod &apos;SwiftyJSON&apos;, &apos;~&gt; 2.3&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
 <p>目前你只要关注如下部分代码，这三句表明了<code>TKTestCocopods</code>z这个project所依赖库的名称和版本号：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pod &apos;AFNetworking&apos;, &apos;~&gt; 2.6&apos;</div><div class="line">pod &apos;ORStackView&apos;, &apos;~&gt; 3.0&apos;</div><div class="line">pod &apos;SwiftyJSON&apos;, &apos;~&gt; 2.3&apos;</div></pre></td></tr></table></figure>
 <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>其余部分代码后续讲解其含义，编辑完成之后，我们可以为我们的项目安装依赖库了，运行<code>pod install</code>命令了：</p>
-<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
+<p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
 <p>安装完成之后，目录下的文件如下：</p>
-<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/4.png" alt=""></p>
+<p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/4.png" alt=""></p>
 <p>打开<code>TKTestCocopods.xcworkspace</code>文件，项目目录结构如下：</p>
-<p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/5.png" alt=""></p>
+<p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/5.png" alt=""></p>
 <h3 id="使用依赖库"><a href="#使用依赖库" class="headerlink" title="使用依赖库"></a>使用依赖库</h3><p>此时，你可以在你项目中导入你需要的依赖库了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;Reachability/Reachability.h&gt;</div></pre></td></tr></table></figure>
-<h2 id="深入"><a href="#深入" class="headerlink" title="深入"></a>深入</h2><h3 id="pod-install究竟做了些什么？"><a href="#pod-install究竟做了些什么？" class="headerlink" title="pod install究竟做了些什么？"></a>pod install究竟做了些什么？</h3><p>我们再回过头看看我们执行<code>pod install</code>的时候，输出的log信息:<br><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
+<h2 id="深入"><a href="#深入" class="headerlink" title="深入"></a>深入</h2><h3 id="pod-install究竟做了些什么？"><a href="#pod-install究竟做了些什么？" class="headerlink" title="pod install究竟做了些什么？"></a>pod install究竟做了些什么？</h3><p>我们再回过头看看我们执行<code>pod install</code>的时候，输出的log信息:<br><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/3.png" alt=""></p>
 <p>把注意力集中在黄色文本信息上，我们不难发现，这条命令执行了如下五个操作：</p>
 <ul>
 <li><strong>Analyzing dependencies</strong>：分析依赖关系</li>
@@ -1124,7 +1124,7 @@
 <p>比如：Podfile里面写了3个依赖文件，为什么按照的时候显示安装了4个依赖库，多出来的<code>FLKAutoLayout</code>从何而来？</p>
 <p>此时就需要得到更详细的log信息了，查阅文档发现，几乎所有的pod命令都有一个可选参数<code>--verbose</code></p>
 <p>verbose是“详细”之意，我们不难猜出，加上这个参数之后，我们可以看到更多的命令执行的log信息，此时运行<code>pod install --verbose</code>命令，此时输出了大量log，我们按照上面的分类来分别解读这些log信息。</p>
-<h4 id="Analyzing-dependencies"><a href="#Analyzing-dependencies" class="headerlink" title="Analyzing dependencies"></a>Analyzing dependencies</h4><p><img src="/2017/08/17/SDK开发实践03：cocopods私有库管理代码/7.png" alt=""></p>
+<h4 id="Analyzing-dependencies"><a href="#Analyzing-dependencies" class="headerlink" title="Analyzing dependencies"></a>Analyzing dependencies</h4><p><img src="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/7.png" alt=""></p>
 <p>这里面包含了4小步：</p>
 
           
@@ -1174,7 +1174,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/15/iOS音视频处理02-获取视频流/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/15/音视频/iOS音视频处理02-获取视频流/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -1193,7 +1193,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/15/iOS音视频处理02-获取视频流/" itemprop="url">iOS音视频处理02-获取视频流</a></h1>
+                <a class="post-title-link" href="/2017/08/15/音视频/iOS音视频处理02-获取视频流/" itemprop="url">iOS音视频处理02-获取视频流</a></h1>
         
 
         <div class="post-meta">
@@ -1319,7 +1319,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/iOS开发者需要了解的C++01/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/音视频/iOS开发者需要了解的C++01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -1338,7 +1338,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/14/iOS开发者需要了解的C++01/" itemprop="url">iOS开发者需要了解的C++01</a></h1>
+                <a class="post-title-link" href="/2017/08/14/音视频/iOS开发者需要了解的C++01/" itemprop="url">iOS开发者需要了解的C++01</a></h1>
         
 
         <div class="post-meta">
@@ -1587,7 +1587,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/SDK开发实践01：开篇/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/SDK/SDK开发实践01：开篇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -1606,7 +1606,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/14/SDK开发实践01：开篇/" itemprop="url">SDK开发实践01：开篇</a></h1>
+                <a class="post-title-link" href="/2017/08/14/SDK/SDK开发实践01：开篇/" itemprop="url">SDK开发实践01：开篇</a></h1>
         
 
         <div class="post-meta">
@@ -1738,7 +1738,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/SDK开发实践02：SDK接口设计原则/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -1757,7 +1757,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/14/SDK开发实践02：SDK接口设计原则/" itemprop="url">SDK开发实践02：SDK接口设计原则</a></h1>
+                <a class="post-title-link" href="/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/" itemprop="url">SDK开发实践02：SDK接口设计原则</a></h1>
         
 
         <div class="post-meta">
@@ -1857,7 +1857,7 @@
 <li>第三方在调起SDK的时候需要向SDK传递参数</li>
 <li>SDK在调用完成之后需要给结果数据到第三方</li>
 </ul>
-<p><img src="/2017/08/14/SDK开发实践02：SDK接口设计原则/2.png" alt="命名前缀前缀"></p>
+<p><img src="/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/2.png" alt="命名前缀前缀"></p>
 <p>前者可以通过<strong>实例方法的参</strong>数或者<strong>@property</strong>两种方法实现；<br>后者一般可以通过<strong>delegate</strong>或者<strong>block</strong>两种方法来实现。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* @brief 调起SDK入口方法</div><div class="line"></div><div class="line">* @param manageVC          SDK的入口页面对应的view controller</div><div class="line">* @param config            配置参数</div><div class="line">* @param delegate          代理</div><div class="line">* ...</div><div class="line">* @param startSucceed      启动SDK成功回调</div><div class="line">* @param failed            启动SDK异常回调</div><div class="line">*/</div><div class="line">typedef void(^XXXServiceStartSucceedBlock)();</div><div class="line">typedef void(^XXXServiceFailedBlock) (NSError * _Nonnull error);</div><div class="line"></div><div class="line">- (void)startXXXServiceWithManageVC:(nonnull UIViewController *)manageVc</div><div class="line">                             config:(nullable XXXConfig *)config</div><div class="line">                           delegate:(nonnull id) delegate</div><div class="line">                              appId:(nonnull NSString *)appId</div><div class="line">                              nonce:(nonnull NSString *)nonce</div><div class="line">                             userId:(nonnull NSString *)userId</div><div class="line">                               sign:(nonnull NSString*)sign</div><div class="line">                            orderNo:(nonnull NSString *)orderNo</div><div class="line">                       startSucceed:(nullable XXXServiceStartSucceedBlock)startSucceed</div><div class="line">                             failed:(nullable XXXServiceFailedBlock)failed;</div><div class="line">// 外部主动退出SDK方法</div><div class="line">- (void)stopService;</div></pre></td></tr></table></figure>
 <p>个人比较倾向于，把启动SDK需要的参数，放在启动方法的参数里面，并用<code>nullable</code>和<code>nonnull</code>来表示必传参数和可选参数。</p>
@@ -1869,7 +1869,7 @@
 <ul>
 <li>内部业务模块之间</li>
 </ul>
-<p><img src="/2017/08/14/SDK开发实践02：SDK接口设计原则/1.png" alt="命名前缀前缀"></p>
+<p><img src="/2017/08/14/SDK/SDK开发实践02：SDK接口设计原则/1.png" alt="命名前缀前缀"></p>
 <p>需要注意的有类名以及bundle名。<br>这样可以避免代码和外部代码以及内部其它产品代码冲突。<br>在SDK输出打包的时候对所包含的类名统一加前缀，这一part在后面cocopod打包的时候说。</p>
 <h4 id="category的使用"><a href="#category的使用" class="headerlink" title="category的使用"></a>category的使用</h4><p>不建议在SDK内部使用category，category会load到外部的方法，举个例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// SDK 内部使用了一个UIColor的category</div><div class="line">// 支持的颜色格式是@&quot;ffffff&quot;，只支持这种输入。</div><div class="line">- (void)colorWithString:(NSString *)color;</div><div class="line"></div><div class="line">// 外部APP也有一个UIColor的category</div><div class="line">// 但支持的颜色格式是@&quot;0xffffff&quot;</div><div class="line">- (void)colorWithString:(NSString *)color;</div><div class="line"></div><div class="line">// 外部APP在调用的时候</div><div class="line">[UIColor colorWithString:@&quot;0x000000&quot;];</div></pre></td></tr></table></figure>

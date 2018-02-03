@@ -97,23 +97,23 @@
 <meta name="description" content="描述：项目中的view controller B在执行pop操作之后回到view controller A，但是B没有释放，导致再次进入B页面的时候会出现一些异常，如下图所示。   1. review源码review A viewcontroller 中的代码 1234567891011121314@property (nonatomic,strong)WBOCRRecViewControlle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手误引发的内存泄漏bug分析">
-<meta property="og:url" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/index.html">
 <meta property="og:site_name" content="tankxie&#39;s blogs">
 <meta property="og:description" content="描述：项目中的view controller B在执行pop操作之后回到view controller A，但是B没有释放，导致再次进入B页面的时候会出现一些异常，如下图所示。   1. review源码review A viewcontroller 中的代码 1234567891011121314@property (nonatomic,strong)WBOCRRecViewControlle">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/2.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/3.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/4.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/6.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/5.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/7.png">
-<meta property="og:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/8.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/7.png">
+<meta property="og:image" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/8.png">
 <meta property="og:updated_time" content="2017-10-19T13:21:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手误引发的内存泄漏bug分析">
 <meta name="twitter:description" content="描述：项目中的view controller B在执行pop操作之后回到view controller A，但是B没有释放，导致再次进入B页面的时候会出现一些异常，如下图所示。   1. review源码review A viewcontroller 中的代码 1234567891011121314@property (nonatomic,strong)WBOCRRecViewControlle">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/1.jpg">
 
 
 
@@ -142,7 +142,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/"/>
 
 
 
@@ -291,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/15/手误引发的内存泄漏bug分析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -361,7 +361,7 @@
         <blockquote>
 <p>描述：项目中的view controller B在执行pop操作之后回到view controller A，但是B没有释放，导致再次进入B页面的时候会出现一些异常，如下图所示。</p>
 </blockquote>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/1.jpg" alt="情况介绍"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/1.jpg" alt="情况介绍"></p>
 <h2 id="1-review源码"><a href="#1-review源码" class="headerlink" title="1. review源码"></a>1. review源码</h2><p>review A viewcontroller 中的代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@property (nonatomic,strong)WBOCRRecViewController *recVC;</div><div class="line"></div><div class="line">- (void)pushCameraToUpperSide:(BOOL)isUpper&#123;</div><div class="line">    // ...   </div><div class="line">    [self.navigationController pushViewController:self.recVC animated:YES];</div><div class="line">&#125;</div><div class="line">- (WBOCRRecViewController *)recVC&#123;</div><div class="line">    if (!_recVC) &#123;</div><div class="line">        _recVC = [[WBOCRRecViewController alloc]init];</div><div class="line">        _recVC.failedBlock = self.failedBlock;</div><div class="line">        _recVC.successBlock = self.successBlock;</div><div class="line">    &#125;</div><div class="line">    return _recVC;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>发现 A 持有了 B故从 B pop 到 A 的时候，不会释放 B，而业务逻辑是需要每次进入B的时候都初始化一次，那就改代码如下：</p>
@@ -369,13 +369,13 @@
 <p>重新run，额，还是不行，难道还有别的对象持有B？<br>由于B中代码的property比较多，前后写代码的时间跨度比较大，review时间成本较高，那就借助工具咯！！！</p>
 <p>##2. 查看对象的实例之间的引用关系</p>
 <p>run项目，进入目标页面，在Xcode的控制面板点击图示按钮</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/2.jpg" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/2.jpg" alt="查看引用关系"></p>
 <p>会出现如下页面，这些图示表示了引用情况</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/3.jpg" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/3.jpg" alt="查看引用关系"></p>
 <p>找到目标对象，由于我之前操作了两次（从A页面进入B，再推出到A操作），这里出现了两个B对象，可以肯定的是，代码发生了内存泄漏</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/4.jpg" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/4.jpg" alt="查看引用关系"></p>
 <p>点击任意一个B对象的实例进去查看详情，蓝色的块表示持有B的对象，桔色表示B，Quick look信息如下：</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/6.jpg" alt="查看引用关系"><br><img src="/2017/10/15/手误引发的内存泄漏bug分析/5.jpg" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/6.jpg" alt="查看引用关系"><br><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/5.jpg" alt="查看引用关系"></p>
 <p>到这儿，找到了罪魁祸首！！！接下来就是回到代码中，查看代码</p>
 <p>##3. 再review代码</p>
 <p>查看代码，发现自己写了这么一段代码</p>
@@ -387,8 +387,8 @@
 <p>很显然没能如愿以偿的释放maskview对象，下面介绍另一个内存泄漏检测的工具</p>
 <h2 id="5-更好用的检测工具-MLeaksFinder"><a href="#5-更好用的检测工具-MLeaksFinder" class="headerlink" title="5. 更好用的检测工具 MLeaksFinder"></a>5. 更好用的检测工具 MLeaksFinder</h2><p><code>MLeaksFinder</code>是微信读书团队开源的一个内存检测工具，使用及其简单，把 MLeaksFinder 目录下的文件添加到你的项目中，就可以在运行时（debug 模式下）帮助你检测项目里的内存泄露了，无需修改任何业务逻辑代码，而且只在 debug 下开启，完全不影响你的 release 包，不污染代码</p>
 <p>debug的时候，检测到代码内存泄漏后，console和界面上都会有输出提示，如下图</p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/7.png" alt="查看引用关系"></p>
-<p><img src="/2017/10/15/手误引发的内存泄漏bug分析/8.png" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/7.png" alt="查看引用关系"></p>
+<p><img src="/2017/10/15/开发笔记/手误引发的内存泄漏bug分析/8.png" alt="查看引用关系"></p>
 <p>不难看出是由于timer导致的，回到代码中，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (void)dealloc&#123;</div><div class="line">    NSLog(@&quot;mask view dealloc!!!&quot;);</div><div class="line">    [self.lineViewTimer invalidate];</div><div class="line">    self.lineViewTimer = nil;</div><div class="line">    [self removeObjectForNotification];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>之前释放timer的方法写在dealloc方法里面，问题是没有release timer，就走不进dealloc方法里面去！！！</p>
@@ -421,7 +421,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/15/SDK性能优化-1/" rel="next" title="SDK性能优化(1)">
+              <a href="/2017/10/15/SDK/SDK性能优化-1/" rel="next" title="SDK性能优化(1)">
                 <i class="fa fa-chevron-left"></i> SDK性能优化(1)
               </a>
             

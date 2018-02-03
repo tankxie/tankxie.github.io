@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="音视频," />
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="大道理很多人都懂，为何脱颖而出的就那么几个人，因为他们不只懂而且也去做了。">
+<meta name="description" content="前言：本篇利用AVFoundation从摄像头获取视频数据。  从摄像头获取视频数据iOS设备调用摄像头，获取视频数据的方式有两种：UIImagePickerController和AVFoundation，下面分析对比一下两种方式的优劣。 实现过程音视频基础知识">
+<meta name="keywords" content="音视频">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/02/02/Swift学习笔记/index.html">
+<meta property="og:title" content="iOS音视频处理02-获取视频流">
+<meta property="og:url" content="http://yoursite.com/2017/08/15/音视频/iOS音视频处理02-获取视频流/index.html">
 <meta property="og:site_name" content="tankxie&#39;s blogs">
-<meta property="og:description" content="大道理很多人都懂，为何脱颖而出的就那么几个人，因为他们不只懂而且也去做了。">
+<meta property="og:description" content="前言：本篇利用AVFoundation从摄像头获取视频数据。  从摄像头获取视频数据iOS设备调用摄像头，获取视频数据的方式有两种：UIImagePickerController和AVFoundation，下面分析对比一下两种方式的优劣。 实现过程音视频基础知识">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-02T15:56:37.162Z">
+<meta property="og:updated_time" content="2017-08-15T13:34:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift学习笔记">
-<meta name="twitter:description" content="大道理很多人都懂，为何脱颖而出的就那么几个人，因为他们不只懂而且也去做了。">
+<meta name="twitter:title" content="iOS音视频处理02-获取视频流">
+<meta name="twitter:description" content="前言：本篇利用AVFoundation从摄像头获取视频数据。  从摄像头获取视频数据iOS设备调用摄像头，获取视频数据的方式有两种：UIImagePickerController和AVFoundation，下面分析对比一下两种方式的优劣。 实现过程音视频基础知识">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/02/Swift学习笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/15/音视频/iOS音视频处理02-获取视频流/"/>
 
 
 
 
 
-  <title>Swift学习笔记 | tankxie's blogs</title>
+  <title>iOS音视频处理02-获取视频流 | tankxie's blogs</title>
   
 
 
@@ -282,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/Swift学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/15/音视频/iOS音视频处理02-获取视频流/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tank">
@@ -299,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Swift学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline">iOS音视频处理02-获取视频流</h1>
         
 
         <div class="post-meta">
@@ -311,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-02T23:56:37+08:00">
-                2018-02-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T21:21:26+08:00">
+                2017-08-15
               </time>
             
 
@@ -321,6 +322,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/音视频学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">音视频学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -349,7 +372,11 @@
       
 
       
-        
+        <blockquote>
+<p>前言：本篇利用AVFoundation从摄像头获取视频数据。</p>
+</blockquote>
+<h2 id="从摄像头获取视频数据"><a href="#从摄像头获取视频数据" class="headerlink" title="从摄像头获取视频数据"></a>从摄像头获取视频数据</h2><p>iOS设备调用摄像头，获取视频数据的方式有两种：<code>UIImagePickerController</code>和<code>AVFoundation</code>，下面分析对比一下两种方式的优劣。</p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h2 id="音视频基础知识"><a href="#音视频基础知识" class="headerlink" title="音视频基础知识"></a>音视频基础知识</h2>
       
     </div>
     
@@ -364,6 +391,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/音视频/" rel="tag"># 音视频</a>
+          
+        </div>
+      
 
       
       
@@ -373,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/02/Swift学习笔记-1/" rel="next" title="Swift学习笔记-1">
-                <i class="fa fa-chevron-left"></i> Swift学习笔记-1
+              <a href="/2017/08/14/音视频/iOS开发者需要了解的C++01/" rel="next" title="iOS开发者需要了解的C++01">
+                <i class="fa fa-chevron-left"></i> iOS开发者需要了解的C++01
               </a>
             
           </div>
@@ -382,6 +415,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/17/SDK/SDK开发实践03：cocopods私有库管理代码/" rel="prev" title="SDK开发实践03：cocopods私有库管理代码">
+                SDK开发实践03：cocopods私有库管理代码 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -433,8 +470,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://www.vstou.com/upload/image/355/201606/1465004143320282.jpg"
@@ -496,6 +542,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从摄像头获取视频数据"><span class="nav-number">1.</span> <span class="nav-text">从摄像头获取视频数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">2.</span> <span class="nav-text">实现过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#音视频基础知识"><span class="nav-number">3.</span> <span class="nav-text">音视频基础知识</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
